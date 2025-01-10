@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Disciplinas</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<h1>Lista de Disciplinas</h1>
+<div th:if="${mensagem}">
+    <p th:text="${mensagem}"></p>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Professor</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="disciplina : ${disciplinas}" >
+        <td th:text="${disciplina.codigoDisciplina}"></td>
+        <td th:text="${disciplina.nome}"></td>
+        <td th:text="${disciplina.professor != null ? disciplina.professor.nome : 'Não atribuído'}"></td>
+        <td>
+            <a th:href="@{'/disciplina/editar/' + ${disciplina.codigoDisciplina}}">Editar</a>
+            <form th:action="@{'/disciplina/excluir/' + ${disciplina.codigoDisciplina}}" method="post" style="display:inline;">
+                <button type="submit">Excluir</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/disciplina/novo">Nova Disciplina</a>
+</body>
+</html>
