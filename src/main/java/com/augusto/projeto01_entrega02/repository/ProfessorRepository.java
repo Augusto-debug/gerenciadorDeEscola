@@ -20,8 +20,7 @@ public class ProfessorRepository {
         String sql = """
                       select codigoProfessor ,
                              nome,
-                             email,
-                             titulacao
+                             email
                       from professor;
                       """;
         return conexao.query(sql, new BeanPropertyRowMapper<>(Professor.class));
@@ -31,8 +30,7 @@ public class ProfessorRepository {
         String sql = """
                       select codigoProfessor ,
                              nome,
-                             email,
-                             titulacao
+                             email
                       from professor
                       where lower(nome) like ?
                       """;
@@ -40,13 +38,13 @@ public class ProfessorRepository {
     }
 
     public void novo(Professor professor) {
-        String sql = "insert into professor(nome, email, titulacao) values (?, ?, ?)";
-        conexao.update(sql, professor.getNome(), professor.getEmail(), professor.getTitulacao());
+        String sql = "insert into professor(nome, email) values (?, ?)";
+        conexao.update(sql, professor.getNome(), professor.getEmail());
     }
 
     public void atualizar(Professor professor) {
-        String sql = "update professor set nome = ?, email = ?, titulacao = ? where codigoProfessor = ?";
-        conexao.update(sql, professor.getNome(), professor.getEmail(), professor.getTitulacao(), professor.getCodigoProfessor());
+        String sql = "update professor set nome = ?, email = ?  where codigoProfessor = ?";
+        conexao.update(sql, professor.getNome(), professor.getEmail(), professor.getCodigoProfessor());
     }
 
     public void excluir(Integer codigo) {
@@ -58,8 +56,7 @@ public class ProfessorRepository {
         String sql = """
                       select codigoProfessor,
                              nome,
-                             email,
-                             titulacao
+                             email
                       from professor
                       where codigoProfessor = ?
                       """;
