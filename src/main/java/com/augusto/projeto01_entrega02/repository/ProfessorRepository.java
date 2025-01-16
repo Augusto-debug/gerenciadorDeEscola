@@ -43,8 +43,8 @@ public class ProfessorRepository {
     }
 
     public void atualizar(Professor professor) {
-        String sql = "update professor set nome = ?, email = ?  where codigoProfessor = ?";
-        conexao.update(sql, professor.getNome(), professor.getEmail(), professor.getCodigoProfessor());
+        String sql = "update professor set nome = ?, email = ?, titulacao = ?  where codigoProfessor = ?";
+        conexao.update(sql, professor.getNome(), professor.getEmail(), professor.getTitulacao(), professor.getCodigoProfessor());
     }
 
     public void excluir(Integer codigo) {
@@ -56,7 +56,8 @@ public class ProfessorRepository {
         String sql = """
                       select codigoProfessor,
                              nome,
-                             email
+                             email,
+                             titulacao
                       from professor
                       where codigoProfessor = ?
                       """;
