@@ -71,6 +71,9 @@ public class ProfessorController {
 
     @PostMapping("/novo")
     public String salvar(@ModelAttribute("professor") Professor professor, RedirectAttributes redirectAttributes) {
+        if (professor.getTitulacao() == null || professor.getTitulacao().isEmpty()) {
+            professor.setTitulacao("Professor");
+        }
         professorRepository.novo(professor);
         redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, professor.getNome() + " salvo com sucesso");
         return URL_REDIRECT_LISTA;
@@ -86,6 +89,9 @@ public class ProfessorController {
     @PostMapping("/editar/{id}")
     public String atualizar(@PathVariable("id") Integer id, @ModelAttribute("professor") Professor professor, RedirectAttributes redirectAttributes) {
         professor.setCodigoProfessor(id);
+        if (professor.getTitulacao() == null || professor.getTitulacao().isEmpty()) {
+            professor.setTitulacao("Professor");
+        }
         professorRepository.atualizar(professor);
         redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, professor.getCodigoProfessor() + " atualizado com sucesso");
         return URL_REDIRECT_LISTA;

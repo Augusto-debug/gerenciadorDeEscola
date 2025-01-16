@@ -21,7 +21,8 @@ CREATE TABLE Professor
 (
     codigoProfessor INT PRIMARY KEY AUTO_INCREMENT,
     nome            VARCHAR(100) NOT NULL,
-    email           VARCHAR(150) NOT NULL UNIQUE
+    email           VARCHAR(150) NOT NULL UNIQUE,
+    titulacao       VARCHAR(100) NULL
 );
 
 INSERT INTO Professor (nome, email)

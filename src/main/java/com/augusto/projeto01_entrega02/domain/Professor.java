@@ -22,7 +22,7 @@ public class Professor {
         return codigoProfessor;
     }
 
-    public void setCodigoProfessor(int codigoProfessor) {
+    public void setCodigoProfessor(Integer codigoProfessor) {
         this.codigoProfessor = codigoProfessor;
     }
 

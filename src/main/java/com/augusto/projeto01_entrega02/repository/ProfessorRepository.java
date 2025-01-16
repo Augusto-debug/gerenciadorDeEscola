@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class ProfessorRepository {
@@ -20,7 +21,8 @@ public class ProfessorRepository {
         String sql = """
                       select codigoProfessor ,
                              nome,
-                             email
+                             email, 
+                             titulacao
                       from professor;
                       """;
         return conexao.query(sql, new BeanPropertyRowMapper<>(Professor.class));
@@ -30,7 +32,8 @@ public class ProfessorRepository {
         String sql = """
                       select codigoProfessor ,
                              nome,
-                             email
+                             email,
+                             titulacao
                       from professor
                       where lower(nome) like ?
                       """;
@@ -38,8 +41,8 @@ public class ProfessorRepository {
     }
 
     public void novo(Professor professor) {
-        String sql = "insert into professor(nome, email) values (?, ?)";
-        conexao.update(sql, professor.getNome(), professor.getEmail());
+        String sql = "insert into professor(nome, email, titulacao) values (?, ?, ?)";
+        conexao.update(sql, professor.getNome(), professor.getEmail(), professor.getTitulacao());
     }
 
     public void atualizar(Professor professor) {
