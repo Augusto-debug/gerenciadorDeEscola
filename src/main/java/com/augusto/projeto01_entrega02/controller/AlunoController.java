@@ -40,16 +40,6 @@ public class AlunoController {
         return URL_LISTA;
     }
 
-    @GetMapping("/buscar")
-    public String buscarPorNome(@RequestParam("nome") String nome, Model model) {
-        List<Aluno> alunosBusca = alunoRepository.buscaPorNome(nome);
-        model.addAttribute(ATRIBUTO_LISTA, alunosBusca);
-        if (alunosBusca.isEmpty()) {
-            model.addAttribute(ATRIBUTO_MENSAGEM, nome + " não encontrado.");
-        }
-        return URL_LISTA;
-    }
-
     @GetMapping("/novo")
     public String abrirFormNovo(Model model) {
         Aluno aluno = new Aluno();

@@ -38,15 +38,6 @@ public class DisciplinaController {
         return URL_LISTA;
     }
 
-    @GetMapping("/buscar")
-    public String buscarPorNome(@RequestParam("nome") String nome, Model model) {
-        List<Disciplina> disciplinasBusca = disciplinaRepository.buscaPorNome(nome);
-        model.addAttribute(ATRIBUTO_LISTA, disciplinasBusca);
-        if (disciplinasBusca.isEmpty()) {
-            model.addAttribute(ATRIBUTO_MENSAGEM, nome + " não encontrado.");
-        }
-        return URL_LISTA;
-    }
 
     @GetMapping("/novo")
     public String abrirFormNovo(Model model) {

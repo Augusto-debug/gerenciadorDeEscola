@@ -34,13 +34,6 @@ public class DisciplinaRepository {
         return jdbcTemplate.queryForObject(sql, new DisciplinaRowMapper(), codigo);
     }
 
-    public List<Disciplina> buscaPorNome(String nome) {
-        String sql = "SELECT d.codigoDisciplina, d.nome, p.codigoProfessor, p.nome AS nomeProfessor, p.email " +
-                "FROM Disciplina d " +
-                "LEFT JOIN Professor p ON d.codigoProfessor = p.codigoProfessor " +
-                "WHERE d.nome LIKE ?";
-        return jdbcTemplate.query(sql, new DisciplinaRowMapper(), "%" + nome + "%");
-    }
 
     public void novo(Disciplina disciplina) {
         String sql = "INSERT INTO Disciplina (nome, codigoProfessor) VALUES (?, ?)";

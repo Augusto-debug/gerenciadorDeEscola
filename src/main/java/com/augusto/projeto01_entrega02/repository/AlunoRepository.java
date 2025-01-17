@@ -27,18 +27,6 @@ public class AlunoRepository {
         return conexao.query(sql, new BeanPropertyRowMapper<>(Aluno.class));
     }
 
-    public List<Aluno> buscaPorNome(String nome) {
-        String sql = """
-                      select codigoAluno as codigoAluno,
-                             nome,
-                             email,
-                             numero_matricula as numeroMatricula
-                      from aluno
-                      where lower(nome) like ?
-                      """;
-        return conexao.query(sql, new BeanPropertyRowMapper<>(Aluno.class), "%" + nome.toLowerCase() + "%");
-    }
-
     public void novo(Aluno aluno) {
         String sql = "insert into aluno(nome, email, numero_matricula) values (?, ?, ?)";
         conexao.update(sql, aluno.getNome(), aluno.getEmail(), aluno.getNumeroMatricula());
