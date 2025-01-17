@@ -28,18 +28,6 @@ public class ProfessorRepository {
         return conexao.query(sql, new BeanPropertyRowMapper<>(Professor.class));
     }
 
-    public List<Professor> buscaPorNome(String nome) {
-        String sql = """
-                      select codigoProfessor ,
-                             nome,
-                             email,
-                             titulacao
-                      from professor
-                      where lower(nome) like ?
-                      """;
-        return conexao.query(sql, new BeanPropertyRowMapper<>(Professor.class), "%" + nome.toLowerCase() + "%");
-    }
-
     public void novo(Professor professor) {
         String sql = "insert into professor(nome, email, titulacao) values (?, ?, ?)";
         conexao.update(sql, professor.getNome(), professor.getEmail(), professor.getTitulacao());
